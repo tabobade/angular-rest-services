@@ -1,6 +1,7 @@
 package com.rest.crud.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,13 +31,21 @@ public class UserRestController {
 	}
 
 	@GetMapping("/user")
-	public ResponseEntity<List<User>> getUser() {
+	public ResponseEntity<List<User>> getUsers() {
 
 		List<User> users = userService.getUsers();
 
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
 
+	
+	@GetMapping("/user/{firstname}")
+	public ResponseEntity<User> getUser(@PathVariable("firstname") String firstname) {
+
+User users = userService.getUser(firstname);
+
+		return new ResponseEntity<User>(users, HttpStatus.OK);
+	}
 	@DeleteMapping("/user/{firstName}")
 	public ResponseEntity<List<User>> deleteUser(@PathVariable("firstName") String firstName) {
 
